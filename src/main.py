@@ -6,44 +6,37 @@ from visualization import draw_target
 
 def main():
     model = YOLO("yolo26n.pt")
-    tracker = Tracker(model)
+    tracker = Tracker(
+        model,
+        detection_interval=4,
+        confidence=0.25,
+        image_size=640
+    )
     camera = cv2.VideoCapture(0)
     if not camera.isOpened():
-        raise RuntimeError("yo camera broke g")
+        raise RuntimeError("yo camera brokee")
     while True:
         success, frame = camera.read()
         if not success:
-            print("frema read error bruh")
+            print("frame read error rbuhhh")
             break
-        results = tracker.track(frame)
-        result = results[0]
-        if result.boxes is not None:
-            for box in result.boxes:
-                class_id = int(box.cls[0])
-                confidence = float(box.conf[0])
-                if class_id != 4:
-                    continue
-                coordinates = box.xyxy[0].cpu().numpy()
-                track_id = None
-                if box.id is not None:
-                    track_id = int(box.id[0])
-                center = get_center(coordinates)
-
-                print(
-                    f"plane "
-                    f"conf: {confidence:.2f} | "
-                    f"mid: ({center[0]:.0f}, {center[1]:.0f}) | "
-                    f"id: {track_id}"
-                )
-                frame = draw_target(
-                    frame,
-                    coordinates,
-                    track_id
-                )
-
-        cv2.imshow("plane trackerr ", frame)
+        box, track_id = tracker.update(frame)
+        if box is not None:
+            center = get_center(box)
+            print(
+                f"plane "
+                f"mid: ({center[0]:.0f}, {center[1]:.0f}) | "
+                f"id: {track_id}"
+            )
+            frame = draw_target(
+                frame,
+                box,
+                track_id
+            )
+        cv2.imshow("plane trackerr", frame)
         if cv2.waitKey(1) & 0xFF == ord("q"):
             break
+
     camera.release()
     cv2.destroyAllWindows()
 

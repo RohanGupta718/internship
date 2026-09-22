@@ -1,6 +1,6 @@
 model:
   path: yolo26n.pt
-  confidence: 0.35
+  confidence: 0.20
   image_size: 640
 
 tracking:
