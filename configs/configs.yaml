@@ -1,0 +1,11 @@
+model:
+  path: yolo26n.pt
+  confidence: 0.35
+  image_size: 640
+
+tracking:
+  tracker: botsort.yaml
+
+video:
+  source: 0
+  display: true
