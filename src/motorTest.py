@@ -16,6 +16,9 @@ def set_angle(angle, duration=1.0):
         GPIO.output(PIN, GPIO.LOW)
         time.sleep((period_ms - pulse_ms) / 1000)
 
+print('Resetting to 0')
+set_angle(0, duration=1.0)
+
 for angle in [60, 120, 90]:
     print(f'Pan -> {angle}')
     set_angle(angle, duration=1.0)
