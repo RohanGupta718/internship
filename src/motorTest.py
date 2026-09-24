@@ -1,11 +1,9 @@
-from adafruit_servokit import ServoKit
+import Jetson.GPIO as GPIO
+import time
  
-PAN_CHANNEL = 0
-TILT_CHANNEL = 1
-
 PAN_PIN = 32
 TILT_PIN = 33
-PWM_FREQ_HZ = 5
+PWM_FREQ_HZ = 50
 
 MIN_DUTY = 5.0
 MAX_DUTY = 10.0
