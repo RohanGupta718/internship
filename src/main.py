@@ -8,7 +8,7 @@ def main():
     model = YOLO("yolo26n.pt")
     tracker = Tracker(
         model,
-        detection_interval=4,
+        detection_interval=8,
         confidence=0.25,
         image_size=640
     )
