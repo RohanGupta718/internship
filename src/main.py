@@ -6,7 +6,7 @@ from target import get_center
 from visualization import draw_target
 
 def main():
-    model = YOLO(Path(__file__).parent / "best.pt")
+    model = YOLO("best.pt")
     tracker = Tracker(
         model,
         detection_interval=8,
