@@ -40,7 +40,7 @@ class Tracker:
     def _detect(self, frame):
         results = self.model.predict(
             frame,
-            classes=[4],
+            classes=[0],
             conf=self.confidence,
             imgsz=self.image_size,
             verbose=False

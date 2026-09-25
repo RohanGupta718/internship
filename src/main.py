@@ -1,11 +1,12 @@
 import cv2
+from pathlib import Path
 from ultralytics import YOLO
 from tracker import Tracker
 from target import get_center
 from visualization import draw_target
 
 def main():
-    model = YOLO("yolo26n.pt")
+    model = YOLO(Path(__file__).parent / "best.pt")
     tracker = Tracker(
         model,
         detection_interval=4,
